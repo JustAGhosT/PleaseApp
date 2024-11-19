@@ -1,0 +1,19 @@
+# Ignore build files
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+.vscode/
+.idea/
+
+# Ignore generated files
+*.db
+*.realm.lock
+*.log
+.DS_Store
+
+# Exclude Android/iOS specific files
+*.apk
+*.ipa

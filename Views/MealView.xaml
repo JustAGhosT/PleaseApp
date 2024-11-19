@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PleaseApp.ViewModels"
+             x:Class="PleaseApp.Views.MealView"
+             Title="Meal Tracker">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+
+            <!-- Header -->
+            <Label Text="Meal Tracker" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" />
+
+            <!-- Search Bar -->
+            <SearchBar Placeholder="Search Meal Templates"
+                       Text="{Binding SearchQuery, Mode=TwoWay}"
+                       SearchCommand="{Binding FilterMealsCommand}" />
+
+            <!-- Meal Templates Section -->
+            <Label Text="Meal Templates" 
+                   FontSize="18" 
+                   FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding MealTemplates}" 
+                            SelectionMode="Single" 
+                            SelectedItem="{Binding SelectedMealTemplate, Mode=TwoWay}">
+                <CollectionView.EmptyView>
+                    <Label Text="No meal templates found." 
+                           FontSize="16" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BackgroundColor="LightGray" CornerRadius="10">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Ingredients}" FontSize="12" TextColor="Gray" />
+                                <Label Text="{Binding Calories, StringFormat='{0} kcal'}" FontSize="12" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- CRUD Buttons -->
+            <Button Text="Add Meal Template" 
+                    Command="{Binding AddMealTemplateCommand}" 
+                    HorizontalOptions="Center" />
+            <Button Text="Delete Selected Meal Template" 
+                    Command="{Binding DeleteMealTemplateCommand}" 
+                    CommandParameter="{Binding SelectedMealTemplate}" 
+                    IsEnabled="{Binding SelectedMealTemplate}" 
+                    HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
